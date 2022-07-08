@@ -11,6 +11,28 @@ export function drawLines ({ context, points }) {
   context.stroke();
 }
 
+export function drawRect({
+  context,
+  x = 0,
+  y = 0,
+  width = 256,
+  height = 256,
+  strokeStyle = "black",
+  fillStyle
+}) {
+  if (fillStyle) {
+    const previousFillStyle = context.fillStyle;
+    context.fillStyle = fillStyle;
+    context.fillRect(x, y, width, height);
+    context.fillStyle = previousFillStyle;
+  }
+
+  const previousStrokeStyle = context.strokeStyle;
+  context.strokeStyle = strokeStyle;
+  context.strokeRect(x, y, width, height);
+  context.strokeStyle = previousStrokeStyle;
+}
+
 export function drawRects({
   context,
   x = 0,
@@ -19,20 +41,41 @@ export function drawRects({
   height = 256,
   numOfRow = 1,
   numOfCol = 1,
-  overlapped = true
+  overlapped = true,
+  strokeStyle,
+  fillStyle
 }) {
   const rowSide = (height - y) / numOfRow;
   const colSide = (width - x) / numOfCol;
   const halfColSide = colSide / 2;
   for (let row = 0; row < numOfRow; row++) {
     for (let col = 0; col < numOfCol; col++) {
-      const x = colSide * col;
+      let x = colSide * col;
       const y = rowSide * row;
       if (overlapped && row % 2 == 0) {
-        context.strokeRect(x - halfColSide, y, colSide, rowSide);
-      } else {
-        context.strokeRect(x, y, colSide, rowSide);
+        x = x - halfColSide;
+        if (col === numOfCol - 1) {
+          drawRect({
+            context,
+            x: x + colSide,
+            y,
+            width: colSide,
+            height: rowSide,
+            strokeStyle,
+            fillStyle
+          });
+        }
       }
+
+      drawRect({
+        context,
+        x,
+        y,
+        width: colSide,
+        height: rowSide,
+        strokeStyle,
+        fillStyle
+      });
     }
   }
 }

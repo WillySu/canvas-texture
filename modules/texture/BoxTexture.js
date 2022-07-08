@@ -1,22 +1,43 @@
 import BaseTexture from "./BaseTexture.js";
-import { drawLines } from "./utils.js";
+import { drawLines, drawRect } from "./utils.js";
 
 export default class BoxTexture extends BaseTexture {
-  constructor ({ width, height, borderRatio } = {}) {
+  constructor ({
+    width,
+    height,
+    borderRatio = 0.1,
+    innerColor = "#806517",
+    outerColor = "#966F33"
+  } = {}) {
     super({ width, height });
-    this.borderRatio = borderRatio || 0.1;
+    this.borderRatio = borderRatio;
+    this.innerColor = innerColor;
+    this.outerColor = outerColor;
   }
 
   render () {
-    this.context.strokeStyle = 'black';
     const factorW = this.width * this.borderRatio;
     const factorH = this.height * this.borderRatio;
     const factorWEnd = this.width - factorW * 2;
     const factorHEnd = this.height - factorH * 2;
 
     this.context.lineWidth = 3;
-    this.context.strokeRect(0, 0, this.width, this.height);
-    this.context.strokeRect(factorW, factorH, factorWEnd, factorHEnd);
+    drawRect({
+      context: this.context,
+      x: 0,
+      y: 0,
+      width: this.width,
+      height: this.height,
+      fillStyle: this.outerColor
+    });
+    drawRect({
+      context: this.context,
+      x: factorW,
+      y: factorH,
+      width: factorWEnd,
+      height: factorHEnd,
+      fillStyle: this.innerColor
+    });
 
     this.context.lineWidth = 1;
     drawLines({
