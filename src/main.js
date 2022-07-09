@@ -1,5 +1,6 @@
 import BrickWallTexture from "../modules/texture/BrickWallTexture.js";
 import CeramicTileTexture from "../modules/texture/CeramicTileTexture.js";
+import SmileFaceTexture from "../modules/texture/SmileFaceTexture.js";
 import WoodenBoxTexture from "../modules/texture/WoodenBoxTexture.js";
 import WoodenWallTexture from "../modules/texture/WoodenWallTexture.js";
 
@@ -25,6 +26,10 @@ function init () {
     {
       title: "Ceramic Tile",
       texture: new CeramicTileTexture()
+    },
+    {
+      title: "Smile Face",
+      texture: new SmileFaceTexture()
     }
   ];
 
