@@ -1,7 +1,7 @@
 import BaseTexture from "./BaseTexture.js";
 import { drawLines, drawRect } from "./utils.js";
 
-export default class BoxTexture extends BaseTexture {
+export default class WoodenBoxTexture extends BaseTexture {
   constructor ({
     width,
     height,

@@ -1,10 +1,10 @@
 import BaseTexture from "./BaseTexture.js";
 import { drawRects } from "./utils.js";
 
-export default class WallTexture extends BaseTexture {
+export default class WoodenWallTexture extends BaseTexture {
   constructor ({ width, height, fillStyle } = {}) {
     super({ width, height });
-    this.fillStyle = fillStyle || "#704214";
+    this.fillStyle = fillStyle || "#966F33";
   }
 
   render () {
@@ -18,7 +18,7 @@ export default class WallTexture extends BaseTexture {
       width: this.width,
       height: this.height,
       numOfRow: 6,
-      numOfCol: 3,
+      numOfCol: 2,
       fillStyle: this.fillStyle
     });
 

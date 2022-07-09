@@ -1,5 +1,7 @@
-import BoxTexture from "../modules/texture/BoxTexture.js";
-import WallTexture from "../modules/texture/WallTexture.js";
+import BrickWallTexture from "../modules/texture/BrickWallTexture.js";
+import CeramicTileTexture from "../modules/texture/CeramicTileTexture.js";
+import WoodenBoxTexture from "../modules/texture/WoodenBoxTexture.js";
+import WoodenWallTexture from "../modules/texture/WoodenWallTexture.js";
 
 function init () {
   const table = document.createElement("table");
@@ -9,12 +11,20 @@ function init () {
   const tbodyTr = document.createElement("tr");
   const data = [
     {
-      title: "Box Texture",
-      canvas: new BoxTexture()
+      title: "Wooden Box",
+      canvas: new WoodenBoxTexture()
     },
     {
-      title: "Wall Texture",
-      canvas: new WallTexture()
+      title: "Brick Wall",
+      canvas: new BrickWallTexture()
+    },
+    {
+      title: "Wooden Wall",
+      canvas: new WoodenWallTexture()
+    },
+    {
+      title: "Ceramic Tile",
+      canvas: new CeramicTileTexture()
     }
   ];
 
