@@ -8,42 +8,54 @@ function init () {
   const thead = document.createElement("thead");
   const theadTr = document.createElement("tr");
   const tbody = document.createElement("tbody");
-  const tbodyTr = document.createElement("tr");
+  const theadData = ["", "Canvas", "Image"];
   const data = [
     {
       title: "Wooden Box",
-      canvas: new WoodenBoxTexture()
+      texture: new WoodenBoxTexture()
     },
     {
       title: "Brick Wall",
-      canvas: new BrickWallTexture()
+      texture: new BrickWallTexture()
     },
     {
       title: "Wooden Wall",
-      canvas: new WoodenWallTexture()
+      texture: new WoodenWallTexture()
     },
     {
       title: "Ceramic Tile",
-      canvas: new CeramicTileTexture()
+      texture: new CeramicTileTexture()
     }
   ];
 
-  data.forEach((d) => {
-    const { title } = d;
+  theadData.forEach((d) => {
     const th = document.createElement("th");
-    th.appendChild(document.createTextNode(title));
+    th.appendChild(document.createTextNode(d));
     theadTr.appendChild(th);
   });
   thead.appendChild(theadTr);
 
   data.forEach((d) => {
-    const { canvas } = d;
-    const td = document.createElement("td");
-    canvas.root = td;
-    canvas.render();
-    tbodyTr.appendChild(td);
+    const { texture, title } = d;
+    texture.render();
+
+    const tr = document.createElement("tr");
+    const th = document.createElement("th");
+    th.appendChild(document.createTextNode(title));
+
+    const canvasTd = document.createElement("td");
+    texture.root = canvasTd;
+
+    const imageTd = document.createElement("td");
+    const img = document.createElement("img");
+    img.src = texture.canvas.toDataURL();
+    imageTd.appendChild(img);
+
+    tr.appendChild(th);
+    tr.appendChild(canvasTd);
+    tr.appendChild(imageTd);
+    tbody.appendChild(tr);
   });
-  tbody.appendChild(tbodyTr);
 
   table.appendChild(thead);
   table.appendChild(tbody);
