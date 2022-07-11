@@ -3,13 +3,14 @@ import CeramicTileTexture from "../modules/texture/CeramicTileTexture.js";
 import SmileFaceTexture from "../modules/texture/SmileFaceTexture.js";
 import WoodenBoxTexture from "../modules/texture/WoodenBoxTexture.js";
 import WoodenWallTexture from "../modules/texture/WoodenWallTexture.js";
+import ThreePreview from "../modules/threeJs/ThreePreview.js";
 
 function init () {
   const table = document.createElement("table");
   const thead = document.createElement("thead");
   const theadTr = document.createElement("tr");
   const tbody = document.createElement("tbody");
-  const theadData = ["", "Canvas", "Image"];
+  const theadData = ["", "Canvas", "Image", "three.js"];
   const data = [
     {
       title: "Wooden Box",
@@ -52,13 +53,17 @@ function init () {
     texture.root = canvasTd;
 
     const imageTd = document.createElement("td");
-    const img = document.createElement("img");
-    img.src = texture.canvas.toDataURL();
-    imageTd.appendChild(img);
+    imageTd.appendChild(texture.getImg());
+
+    const threeJsTd = document.createElement("td");
+    const preview = new ThreePreview();
+    preview.add(texture.get3DObject({ side: 16 }));
+    threeJsTd.appendChild(preview.renderer.domElement);
 
     tr.appendChild(th);
     tr.appendChild(canvasTd);
     tr.appendChild(imageTd);
+    tr.appendChild(threeJsTd);
     tbody.appendChild(tr);
   });
 
