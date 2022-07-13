@@ -1,9 +1,9 @@
-import BrickWallTexture from "../modules/texture/BrickWallTexture.js";
-import CeramicTileTexture from "../modules/texture/CeramicTileTexture.js";
-import SmileFaceTexture from "../modules/texture/SmileFaceTexture.js";
-import WoodenBoxTexture from "../modules/texture/WoodenBoxTexture.js";
-import WoodenWallTexture from "../modules/texture/WoodenWallTexture.js";
-import ThreePreview from "../modules/threeJs/ThreePreview.js";
+import BrickWallTexture from "../../modules/texture/BrickWallTexture.js";
+import CeramicTileTexture from "../../modules/texture/CeramicTileTexture.js";
+import SmileFaceTexture from "../../modules/texture/SmileFaceTexture.js";
+import WoodenBoxTexture from "../../modules/texture/WoodenBoxTexture.js";
+import WoodenWallTexture from "../../modules/texture/WoodenWallTexture.js";
+import ThreePreview from "../../modules/threeJs/ThreePreview.js";
 
 function init () {
   const table = document.createElement("table");

@@ -1,10 +1,15 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Canvas Texture</title>
-    <script type="module" src="src/main.js"></script>
+    <title>Sokoban</title>
+    <script type="module" src="src/js/index.js"></script>
     <link rel="stylesheet" type="text/css" href="src/css/index.css">
   </head>
-  <body>
+  <body class="main-body">
+    <section class="nav-bar">
+      <a id="textureLink" target="contentIFrame" href="/textures.htm">Texture Preview</a>
+      <a id="sokobanLink"  target="contentIFrame" href="/sokoban.htm">Sokoban</a>
+    </section>
+    <iframe id="contentIFrame" name="contentIFrame" class="content" />
   </body>
 </html>

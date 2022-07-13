@@ -1,3 +1,42 @@
-body {
+html, body {
   margin: 0;
+  height: 100%;
+}
+
+body {
+  padding: 12px;
+}
+
+.main-body {
+  padding: 0;
+  overflow: hidden;
+}
+
+.nav-bar {
+  height: 48px;
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  justify-content: space-around;
+}
+
+.nav-bar a {
+  text-decoration: none;
+  display: block;
+  color: black;
+  padding: 12px 24px;
+  border-radius: 12px;
+}
+
+.nav-bar a.active {
+  background-color: lightgray;
+}
+
+.nav-bar a:hover {
+  text-decoration: underline;
+}
+
+.content {
+  width: 100%;
+  height: calc(100% - 48px);
 }
