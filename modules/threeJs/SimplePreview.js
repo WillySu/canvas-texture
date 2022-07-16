@@ -1,11 +1,11 @@
 import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.121.1/build/three.module.js";
 import { OrbitControls } from "https://cdn.jsdelivr.net/npm/three@0.121.1/examples/jsm/controls/OrbitControls.js";
 
-export default class ThreePreview {
+export default class SimplePreview {
   UNIT = 16;
   _height;
   _width;
-  _root;
+  _parent;
 
   constructor ({ width, height } = {}) {
     this._height = height || 256;
@@ -39,6 +39,15 @@ export default class ThreePreview {
   set width (width) {
     this._width = width;
     resize();
+  }
+
+  get parent () {
+    return this._parent;
+  }
+
+  set parent (newParent) {
+    this._parent = newParent;
+    newParent.appendChild(this.renderer.domElement);
   }
 
   resize () {

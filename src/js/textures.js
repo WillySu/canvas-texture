@@ -3,7 +3,7 @@ import CeramicTileTexture from "../../modules/texture/CeramicTileTexture.js";
 import SmileFaceTexture from "../../modules/texture/SmileFaceTexture.js";
 import WoodenBoxTexture from "../../modules/texture/WoodenBoxTexture.js";
 import WoodenWallTexture from "../../modules/texture/WoodenWallTexture.js";
-import ThreePreview from "../../modules/threeJs/ThreePreview.js";
+import SimplePreview from "../../modules/threeJs/SimplePreview.js";
 
 function init () {
   const table = document.createElement("table");
@@ -50,13 +50,13 @@ function init () {
     th.appendChild(document.createTextNode(title));
 
     const canvasTd = document.createElement("td");
-    texture.root = canvasTd;
+    texture.parent = canvasTd;
 
     const imageTd = document.createElement("td");
     imageTd.appendChild(texture.getImg());
 
     const threeJsTd = document.createElement("td");
-    const preview = new ThreePreview();
+    const preview = new SimplePreview();
     preview.add(texture.get3DObject({ side: 16 }));
     threeJsTd.appendChild(preview.renderer.domElement);
 

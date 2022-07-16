@@ -4,7 +4,7 @@ export default class BaseTexture {
   _context;
   _height;
   _width;
-  _root;
+  _parent;
 
   constructor ({ width, height } = {}) {
     this.canvas = document.createElement("canvas");
@@ -31,14 +31,14 @@ export default class BaseTexture {
     this.canvas.setAttribute("width", this._width);
   }
 
-  get root () {
-    return this._root;
+  get parent () {
+    return this._parent;
   }
 
-  set root (newRoot) {
-    if (newRoot) {
-      this._root = newRoot;
-      this._root.appendChild(this.canvas);
+  set parent (newParent) {
+    if (newParent) {
+      this._parent = newParent;
+      this._parent.appendChild(this.canvas);
     }
   }
 

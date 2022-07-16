@@ -7,7 +7,7 @@ body {
   padding: 12px;
 }
 
-.main-body {
+.no-padding {
   padding: 0;
   overflow: hidden;
 }
