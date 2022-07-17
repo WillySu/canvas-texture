@@ -2,14 +2,17 @@ import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.121.1/build/three.m
 import { OrbitControls } from "https://cdn.jsdelivr.net/npm/three@0.121.1/examples/jsm/controls/OrbitControls.js";
 
 export default class SimplePreview {
-  UNIT = 16;
   _height;
   _width;
   _parent;
 
-  constructor ({ width, height } = {}) {
+  constructor ({ width, height, cameraPosition } = {}) {
     this._height = height || 256;
     this._width = width || 256;
+    this.cameraPosition = cameraPosition || {
+      x: 16, y: 16, z: 32
+    };
+
     this.renderer = new THREE.WebGLRenderer();
     this.camera = new THREE.PerspectiveCamera(75, this.width / this.height, 0.1, 1000);
     this.scene = new THREE.Scene();
@@ -52,8 +55,8 @@ export default class SimplePreview {
 
   resize () {
     const {
-      UNIT,
       camera,
+      cameraPosition,
       controls,
       renderer,
       scene,
@@ -62,7 +65,11 @@ export default class SimplePreview {
     } = this;
 
     camera.aspect = width / height;
-    camera.position.set(UNIT, UNIT, UNIT * 2);
+    camera.position.set(
+      cameraPosition.x,
+      cameraPosition.y,
+      cameraPosition.z
+    );
     camera.lookAt(0, 0, 0);
     camera.updateProjectionMatrix();
   
