@@ -5,6 +5,8 @@ export default class CeramicTileTexture extends BaseTexture {
   constructor ({ width, height, fillStyle } = {}) {
     super({ width, height });
     this.fillStyle = fillStyle || "#786D5F";
+
+    this.render();
   }
 
   render () {

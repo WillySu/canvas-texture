@@ -1,10 +1,15 @@
+import SokobanMap from "../../modules/sokoban/SokobanMap.js";
 import FullScreen from "../../modules/threeJs/FullScreen.js";
 
 function init () {
+  const sokobanMap = new SokobanMap();
+  sokobanMap.render();
+
   const fullScreen = new FullScreen({
-    cameraPosition: { x: 64, y: 64, z: 128 }
+    cameraPosition: { x: 128, y: 128, z: 256 }
   });
 
+  fullScreen.add(sokobanMap.map);
   fullScreen.parent = document.body;
 }
 

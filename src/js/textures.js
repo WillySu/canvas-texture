@@ -43,8 +43,6 @@ function init () {
 
   data.forEach((d) => {
     const { texture, title } = d;
-    texture.render();
-
     const tr = document.createElement("tr");
     const th = document.createElement("th");
     th.appendChild(document.createTextNode(title));

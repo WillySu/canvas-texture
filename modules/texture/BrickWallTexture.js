@@ -5,6 +5,8 @@ export default class BrickWallTexture extends BaseTexture {
   constructor ({ width, height, fillStyle } = {}) {
     super({ width, height });
     this.fillStyle = fillStyle || "#704214";
+
+    this.render();
   }
 
   render () {

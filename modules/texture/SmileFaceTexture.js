@@ -12,6 +12,8 @@ export default class SmileFaceTexture extends BaseTexture {
     super({ width, height });
     this.faceColor = faceColor;
     this.strokeFill = strokeFill;
+
+    this.render();
   }
 
   render () {

@@ -56,11 +56,19 @@ export default class BaseTexture {
     return img;
   }
 
-  get3DObject ({ side = 1 } = {}) {
-    const geometry = new THREE.BoxGeometry(side, side, side);
+  getTexture () {
     const texture = new THREE.Texture(this.getImg());
     texture.needsUpdate = true;
-    const material = new THREE.MeshBasicMaterial({ map: texture });
-    return new THREE.Mesh(geometry, material);
+
+    return texture;
+  }
+
+  getMaterial () {
+    return new THREE.MeshBasicMaterial({ map: this.getTexture() });
+  }
+
+  get3DObject ({ side = 1 } = {}) {
+    const geometry = new THREE.BoxGeometry(side, side, side);
+    return new THREE.Mesh(geometry, this.getMaterial());
   }
 }

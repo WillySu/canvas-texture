@@ -13,6 +13,8 @@ export default class WoodenBoxTexture extends BaseTexture {
     this.borderRatio = borderRatio;
     this.innerColor = innerColor;
     this.outerColor = outerColor;
+
+    this.render();
   }
 
   render () {

@@ -5,6 +5,8 @@ export default class WoodenWallTexture extends BaseTexture {
   constructor ({ width, height, fillStyle } = {}) {
     super({ width, height });
     this.fillStyle = fillStyle || "#966F33";
+
+    this.render();
   }
 
   render () {

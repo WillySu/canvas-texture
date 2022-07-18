@@ -1,10 +1,11 @@
 import SimplePreview from "./SimplePreview.js";
 
 export default class FullScreen extends SimplePreview {
-  constructor () {
+  constructor ({ cameraPosition } = {}) {
     super({
       width: window.innerWidth,
-      height: window.innerHeight
+      height: window.innerHeight,
+      cameraPosition: cameraPosition
     })
 
     window.addEventListener("resize", this.onWindowResize.bind(this));

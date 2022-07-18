@@ -10,7 +10,7 @@ export default class SimplePreview {
     this._height = height || 256;
     this._width = width || 256;
     this.cameraPosition = cameraPosition || {
-      x: 16, y: 16, z: 32
+      x: 18, y: 18, z: 36
     };
 
     this.renderer = new THREE.WebGLRenderer();
