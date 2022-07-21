@@ -1,3 +1,4 @@
+import ArrowTexture, { DIRECTIONS } from "../../modules/texture/ArrowTexture.js";
 import BrickWallTexture from "../../modules/texture/BrickWallTexture.js";
 import CeramicTileTexture from "../../modules/texture/CeramicTileTexture.js";
 import SmileFaceTexture from "../../modules/texture/SmileFaceTexture.js";
@@ -31,6 +32,22 @@ function init () {
     {
       title: "Smile Face",
       texture: new SmileFaceTexture()
+    },
+    {
+      title: "UP Arrow",
+      texture: new ArrowTexture({ direction: DIRECTIONS.TOP })
+    },
+    {
+      title: "LEFT Arrow",
+      texture: new ArrowTexture({ direction: DIRECTIONS.LEFT })
+    },
+    {
+      title: "BOTTOM Arrow",
+      texture: new ArrowTexture({ direction: DIRECTIONS.BOTTOM })
+    },
+    {
+      title: "RIGHT Arrow",
+      texture: new ArrowTexture({ direction: DIRECTIONS.RIGHT })
     }
   ];
 
