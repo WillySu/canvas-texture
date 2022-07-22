@@ -67,8 +67,12 @@ export default class BaseTexture {
     return new THREE.MeshBasicMaterial({ map: this.getTexture() });
   }
 
+  getGeometry ({ side } = {}) {
+    return new THREE.BoxGeometry(side, side, side);
+  }
+
   get3DObject ({ side = 1 } = {}) {
-    const geometry = new THREE.BoxGeometry(side, side, side);
+    const geometry = this.getGeometry({ side });
     return new THREE.Mesh(geometry, this.getMaterial());
   }
 }

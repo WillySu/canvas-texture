@@ -52,7 +52,7 @@ export default class SokobanMap extends BasicMap {
     return mesh;
   }
 
-  getSokoban () {
+  getSokobanMesh () {
     const { MATERIALS_MAP, TILES, side } = this;
     const sphere = new THREE.SphereGeometry(side / 2, 18, 18);
     const sokoban = new THREE.Mesh(sphere, MATERIALS_MAP[TILES.SOKOBAN]);
@@ -64,7 +64,7 @@ export default class SokobanMap extends BasicMap {
     return sokobanGroup;
   }
 
-  getWoodenBox () {
+  getBoxMesh () {
     const { MATERIALS_MAP, TILES, side } = this;
     const boxSide = side * .75;
     const boxGeo = new THREE.BoxGeometry(boxSide, boxSide, boxSide);
@@ -78,24 +78,33 @@ export default class SokobanMap extends BasicMap {
     return boxGroup;
   }
 
+  getExitMesh (code) {
+    const { MATERIALS_MAP, side } = this;
+    const arrowGeo = new THREE.PlaneGeometry(side, side);
+    const arrowMesh = new THREE.Mesh(arrowGeo, MATERIALS_MAP[code]);
+    const boxGroup = new THREE.Group();
+
+    arrowMesh.rotation.x = -Math.PI / 2;
+    arrowMesh.position.y = -side / 2;
+
+    boxGroup.add(arrowMesh);
+    boxGroup.add(this.getGroundMesh());
+
+    return boxGroup;
+  }
+
   getMesh ({ row, col }) {
     const { EXIT_TILE_LIST, MATERIALS_MAP, TILES, matrix, side } = this;
     const code = matrix[row][col];
 
     if (code === TILES.SOKOBAN) {
-      return this.getSokoban();
+      return this.getSokobanMesh();
     } else if (code === TILES.BOX) {
-      return this.getWoodenBox();
+      return this.getBoxMesh();
     } else if (code === TILES.EMPTY) {
       return this.getGroundMesh();
     } else if (EXIT_TILE_LIST.includes(code)) {
-      const arrowGeo = new THREE.PlaneGeometry(side, side);
-      const arrowMesh = new THREE.Mesh(arrowGeo, MATERIALS_MAP[code]);
-
-      arrowMesh.rotation.x = -Math.PI / 2;
-      arrowMesh.position.y = -side / 2;
-
-      return arrowMesh;
+      return this.getExitMesh(code);
     }
 
     const geometry = new THREE.BoxGeometry(side, side, side);

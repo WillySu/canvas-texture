@@ -1,3 +1,5 @@
+import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.121.1/build/three.module.js";
+
 import BaseTexture from "./BaseTexture.js";
 import { drawLines, drawRect } from "./utils.js";
 
@@ -37,16 +39,6 @@ export default class WoodenBoxTexture extends BaseTexture {
     this.context.rotate(Math.PI * direction);
     this.context.translate(-halfW, -halfH);
 
-    this.context.lineWidth = 1;
-    drawRect({
-      context: this.context,
-      x: 0,
-      y: 0,
-      width,
-      height,
-      fillStyle: "white"
-    });
-
     this.context.lineWidth = 3;
     drawLines({
       context: this.context,
@@ -63,5 +55,13 @@ export default class WoodenBoxTexture extends BaseTexture {
       fillStyle,
       strokeStyle
     });
+  }
+
+  getMaterial () {
+    return new THREE.MeshBasicMaterial({ map: this.getTexture(), transparent: true });
+  }
+
+  getGeometry ({ side } = {}) {
+    return new THREE.PlaneGeometry(side, side);
   }
 }
