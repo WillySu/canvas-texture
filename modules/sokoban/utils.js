@@ -1,9 +1,10 @@
-import ArrowTexture, { DIRECTIONS } from "../texture/ArrowTexture.js";
+import ArrowTexture from "../texture/ArrowTexture.js";
 import BrickWallTexture from "../texture/BrickWallTexture.js";
 import CeramicTileTexture from "../texture/CeramicTileTexture.js";
 import SmileFaceTexture from "../texture/SmileFaceTexture.js";
 import WoodenBoxTexture from "../texture/WoodenBoxTexture.js";
 import WoodenWallTexture from "../texture/WoodenWallTexture.js";
+import { DIRECTIONS } from "../texture/SymboleTexture.js";
 
 export const DEFAULT_TILES = {
   EMPTY: 0,

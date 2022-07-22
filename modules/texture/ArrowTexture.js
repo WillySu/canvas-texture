@@ -1,43 +1,10 @@
-import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.121.1/build/three.module.js";
+import SymboleTexture from "./SymboleTexture.js";
+import { drawLines } from "./utils.js";
 
-import BaseTexture from "./BaseTexture.js";
-import { drawLines, drawRect } from "./utils.js";
-
-export const DIRECTIONS = {
-  TOP: 0,
-  LEFT: 0.5,
-  BOTTOM: 1,
-  RIGHT: -0.5
-};
-
-export default class WoodenBoxTexture extends BaseTexture {
-  constructor ({
-    width,
-    height,
-    direction = DIRECTIONS.TOP,
-    fillStyle = "green",
-    strokeStyle = "black",
-    ratio = 0.1
-  } = {}) {
-    super({ width, height });
-    this.direction = direction;
-    this.fillStyle = fillStyle;
-    this.strokeStyle = strokeStyle;
-    this.ratio = ratio;
-
-    this.render();
-  }
-
+export default class ArrowTexture extends SymboleTexture {
   render () {
-    const { width, height, ratio, fillStyle, strokeStyle, direction } = this;
-    const halfW = width / 2;
-    const halfH = height / 2;
-    const marginW = width * ratio;
-    const marginH = height * ratio;
-
-    this.context.translate(halfW, halfH);
-    this.context.rotate(Math.PI * direction);
-    this.context.translate(-halfW, -halfH);
+    super.render();
+    const { width, height, halfW, halfH, marginW, marginH, fillStyle, strokeStyle } = this;
 
     this.context.lineWidth = 3;
     drawLines({
@@ -55,13 +22,5 @@ export default class WoodenBoxTexture extends BaseTexture {
       fillStyle,
       strokeStyle
     });
-  }
-
-  getMaterial () {
-    return new THREE.MeshBasicMaterial({ map: this.getTexture(), transparent: true });
-  }
-
-  getGeometry ({ side } = {}) {
-    return new THREE.PlaneGeometry(side, side);
   }
 }

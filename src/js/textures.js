@@ -1,12 +1,16 @@
-import ArrowTexture, { DIRECTIONS } from "../../modules/texture/ArrowTexture.js";
+import ArrowTexture from "../../modules/texture/ArrowTexture.js";
 import BrickWallTexture from "../../modules/texture/BrickWallTexture.js";
 import CeramicTileTexture from "../../modules/texture/CeramicTileTexture.js";
 import SmileFaceTexture from "../../modules/texture/SmileFaceTexture.js";
+import TriangleTexture from "../../modules/texture/TriangleTexture.js";
 import WoodenBoxTexture from "../../modules/texture/WoodenBoxTexture.js";
 import WoodenWallTexture from "../../modules/texture/WoodenWallTexture.js";
 import SimplePreview from "../../modules/threeJs/SimplePreview.js";
+import { DIRECTIONS } from "../../modules/texture/SymboleTexture.js";
 
 function init () {
+  const width = 128;
+  const height = 128;
   const table = document.createElement("table");
   const thead = document.createElement("thead");
   const theadTr = document.createElement("tr");
@@ -15,39 +19,55 @@ function init () {
   const data = [
     {
       title: "Wooden Box",
-      texture: new WoodenBoxTexture()
+      texture: new WoodenBoxTexture({ width, height })
     },
     {
       title: "Brick Wall",
-      texture: new BrickWallTexture()
+      texture: new BrickWallTexture({ width, height })
     },
     {
       title: "Wooden Wall",
-      texture: new WoodenWallTexture()
+      texture: new WoodenWallTexture({ width, height })
     },
     {
       title: "Ceramic Tile",
-      texture: new CeramicTileTexture()
+      texture: new CeramicTileTexture({ width, height })
     },
     {
       title: "Smile Face",
-      texture: new SmileFaceTexture()
+      texture: new SmileFaceTexture({ width, height })
     },
     {
-      title: "UP Arrow",
-      texture: new ArrowTexture({ direction: DIRECTIONS.TOP })
+      title: "Up Arrow",
+      texture: new ArrowTexture({ width, height, direction: DIRECTIONS.TOP })
     },
     {
-      title: "LEFT Arrow",
-      texture: new ArrowTexture({ direction: DIRECTIONS.LEFT })
+      title: "Left Arrow",
+      texture: new ArrowTexture({ width, height, direction: DIRECTIONS.LEFT })
     },
     {
-      title: "BOTTOM Arrow",
-      texture: new ArrowTexture({ direction: DIRECTIONS.BOTTOM })
+      title: "Bottom Arrow",
+      texture: new ArrowTexture({ width, height, direction: DIRECTIONS.BOTTOM })
     },
     {
-      title: "RIGHT Arrow",
-      texture: new ArrowTexture({ direction: DIRECTIONS.RIGHT })
+      title: "Right Arrow",
+      texture: new ArrowTexture({ width, height, direction: DIRECTIONS.RIGHT })
+    },
+    {
+      title: "Up Triangle",
+      texture: new TriangleTexture({ width, height, direction: DIRECTIONS.TOP })
+    },
+    {
+      title: "Left Triangle",
+      texture: new TriangleTexture({ width, height, direction: DIRECTIONS.LEFT })
+    },
+    {
+      title: "Bottom Triangle",
+      texture: new TriangleTexture({ width, height, direction: DIRECTIONS.BOTTOM })
+    },
+    {
+      title: "Right Triangle",
+      texture: new TriangleTexture({ width, height, direction: DIRECTIONS.RIGHT })
     }
   ];
 
@@ -71,7 +91,7 @@ function init () {
     imageTd.appendChild(texture.getImg());
 
     const threeJsTd = document.createElement("td");
-    const preview = new SimplePreview();
+    const preview = new SimplePreview({ width, height });
     preview.add(texture.get3DObject({ side: 16 }));
     threeJsTd.appendChild(preview.renderer.domElement);
 
