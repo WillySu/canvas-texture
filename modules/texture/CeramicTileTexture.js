@@ -1,7 +1,7 @@
-import BaseTexture from "./BaseTexture.js";
+import Canvas from "../Canvas.js";
 import { drawRects } from "./utils.js";
 
-export default class CeramicTileTexture extends BaseTexture {
+export default class CeramicTileTexture extends Canvas {
   constructor ({ width, height, fillStyle } = {}) {
     super({ width, height });
     this.fillStyle = fillStyle || "#786D5F";

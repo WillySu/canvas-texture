@@ -1,8 +1,8 @@
 import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.121.1/build/three.module.js";
-import BaseTexture from "./BaseTexture.js";
+import Canvas from "../Canvas.js";
 import { DEG_180, drawCircle, drawLines } from "./utils.js";
 
-export default class SmileFaceTexture extends BaseTexture {
+export default class SmileFaceTexture extends Canvas {
   constructor ({
     width,
     height,
@@ -30,7 +30,7 @@ export default class SmileFaceTexture extends BaseTexture {
     // left eye
     drawCircle({
       context: this.context,
-      x: halfW - 16,
+      x: halfW * 0.8,
       y: oneQuarterH * 1.75,
       xRadius,
       yRadius,
@@ -40,7 +40,7 @@ export default class SmileFaceTexture extends BaseTexture {
     // right eye
     drawCircle({
       context: this.context,
-      x: halfW + 16,
+      x: halfW * 1.2,
       y: oneQuarterH * 1.75,
       xRadius,
       yRadius,
@@ -65,7 +65,7 @@ export default class SmileFaceTexture extends BaseTexture {
     drawCircle({
       context: this.context,
       x: halfW,
-      y: this.width * 0.55,
+      y: this.height * 0.6,
       xRadius: this.width * 0.1,
       yRadius: this.height * 0.1,
       fillStyle: this.strokeFill,

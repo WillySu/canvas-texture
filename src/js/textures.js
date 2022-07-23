@@ -1,3 +1,4 @@
+import BaseControlPad from "../../modules/control-pad/BaseControlPad.js";
 import ArrowTexture from "../../modules/texture/ArrowTexture.js";
 import BrickWallTexture from "../../modules/texture/BrickWallTexture.js";
 import CeramicTileTexture from "../../modules/texture/CeramicTileTexture.js";
@@ -9,8 +10,8 @@ import SimplePreview from "../../modules/threeJs/SimplePreview.js";
 import { DIRECTIONS } from "../../modules/texture/SymboleTexture.js";
 
 function init () {
-  const width = 128;
-  const height = 128;
+  const width = 64;
+  const height = 64;
   const table = document.createElement("table");
   const thead = document.createElement("thead");
   const theadTr = document.createElement("tr");
@@ -19,23 +20,28 @@ function init () {
   const data = [
     {
       title: "Wooden Box",
-      texture: new WoodenBoxTexture({ width, height })
+      texture: new WoodenBoxTexture({ width, height }),
+      side: 16
     },
     {
       title: "Brick Wall",
-      texture: new BrickWallTexture({ width, height })
+      texture: new BrickWallTexture({ width, height }),
+      side: 16
     },
     {
       title: "Wooden Wall",
-      texture: new WoodenWallTexture({ width, height })
+      texture: new WoodenWallTexture({ width, height }),
+      side: 16
     },
     {
       title: "Ceramic Tile",
-      texture: new CeramicTileTexture({ width, height })
+      texture: new CeramicTileTexture({ width, height }),
+      side: 16
     },
     {
       title: "Smile Face",
-      texture: new SmileFaceTexture({ width, height })
+      texture: new SmileFaceTexture({ width, height }),
+      side: 16
     },
     {
       title: "Up Arrow",
@@ -68,6 +74,10 @@ function init () {
     {
       title: "Right Triangle",
       texture: new TriangleTexture({ width, height, direction: DIRECTIONS.RIGHT })
+    },
+    {
+      title: "Base Control Pad",
+      texture: new BaseControlPad({ width, height })
     }
   ];
 
@@ -79,7 +89,7 @@ function init () {
   thead.appendChild(theadTr);
 
   data.forEach((d) => {
-    const { texture, title } = d;
+    const { texture, title, side = 32 } = d;
     const tr = document.createElement("tr");
     const th = document.createElement("th");
     th.appendChild(document.createTextNode(title));
@@ -92,7 +102,7 @@ function init () {
 
     const threeJsTd = document.createElement("td");
     const preview = new SimplePreview({ width, height });
-    preview.add(texture.get3DObject({ side: 16 }));
+    preview.add(texture.get3DObject({ side }));
     threeJsTd.appendChild(preview.renderer.domElement);
 
     tr.appendChild(th);

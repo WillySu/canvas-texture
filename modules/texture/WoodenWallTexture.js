@@ -1,7 +1,7 @@
-import BaseTexture from "./BaseTexture.js";
+import Canvas from "../Canvas.js";
 import { drawRects } from "./utils.js";
 
-export default class WoodenWallTexture extends BaseTexture {
+export default class WoodenWallTexture extends Canvas {
   constructor ({ width, height, fillStyle } = {}) {
     super({ width, height });
     this.fillStyle = fillStyle || "#966F33";

@@ -1,11 +1,10 @@
 import TransparentTexture from "./TransparentTexture.js";
-import { drawLines } from "./utils.js";
 
 export const DIRECTIONS = {
   TOP: 0,
-  LEFT: 0.5,
+  RIGHT: 0.5,
   BOTTOM: 1,
-  RIGHT: -0.5
+  LEFT: -0.5
 };
 
 export default class SymboleTexture extends TransparentTexture {  

@@ -1,6 +1,6 @@
 import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.121.1/build/three.module.js";
 
-export default class BaseTexture {
+export default class Canvas {
   _context;
   _height;
   _width;
@@ -51,8 +51,12 @@ export default class BaseTexture {
   }
 
   getImg () {
+    const { width, height } = this;
     const img = new Image();
     img.src = this.toDataURL();
+    img.width = width;
+    img.height = height;
+
     return img;
   }
 

@@ -4,7 +4,8 @@ import { drawLines } from "./utils.js";
 export default class TriangleTexture extends SymboleTexture {
   render () {
     super.render();
-    const { width, height, halfW, marginW, marginH, fillStyle, strokeStyle } = this;
+
+    const { width, height, halfW, halfH, marginW, marginH, fillStyle, strokeStyle } = this;
     const moreMarginH = marginH * 2;
 
     this.context.lineWidth = 3;
@@ -13,7 +14,7 @@ export default class TriangleTexture extends SymboleTexture {
       points: [
         [halfW, moreMarginH],
         [width - marginW, height - moreMarginH],
-        [marginW + marginW, height - moreMarginH],
+        [marginW, height - moreMarginH],
         [halfW, moreMarginH]
       ],
       fillStyle,

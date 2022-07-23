@@ -38,9 +38,9 @@ export const DEFAULT_MATERIALS_MAP = {
   [DEFAULT_TILES.OBSTICLE]: (new WoodenWallTexture()).getMaterial(),
   [DEFAULT_TILES.WALL]: (new BrickWallTexture()).getMaterial(),
   [DEFAULT_TILES.ARROW_UP]: (new ArrowTexture({ direction: DIRECTIONS.TOP })).getMaterial(),
-  [DEFAULT_TILES.ARROW_RIGHT]: (new ArrowTexture({ direction: DIRECTIONS.LEFT })).getMaterial(),
+  [DEFAULT_TILES.ARROW_RIGHT]: (new ArrowTexture({ direction: DIRECTIONS.RIGHT })).getMaterial(),
   [DEFAULT_TILES.ARROW_BOTTOM]: (new ArrowTexture({ direction: DIRECTIONS.BOTTOM })).getMaterial(),
-  [DEFAULT_TILES.ARROW_LEFT]: (new ArrowTexture({ direction: DIRECTIONS.RIGHT })).getMaterial()
+  [DEFAULT_TILES.ARROW_LEFT]: (new ArrowTexture({ direction: DIRECTIONS.LEFT })).getMaterial()
 };
 
 export const DEFAULT_MATRIX = [
