@@ -1,8 +1,8 @@
 import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.121.1/build/three.module.js";
-import Canvas from "../Canvas.js";
+import BaseCanvas from "../canvas/BaseCanvas.js";
 import { DEG_180, drawCircle, drawLines } from "./utils.js";
 
-export default class SmileFaceTexture extends Canvas {
+export default class SmileFaceTexture extends BaseCanvas {
   constructor ({
     width,
     height,

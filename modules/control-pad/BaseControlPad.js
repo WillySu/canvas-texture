@@ -1,8 +1,8 @@
-import Canvas from "../Canvas.js";
+import TransparentCanvas from "../canvas/TransparentCanvas.js";
 import { DIRECTIONS } from "../texture/SymboleTexture.js";
 import TriangleTexture from "../texture/TriangleTexture.js";
 
-export default class BaseControlPad extends Canvas {
+export default class BaseControlPad extends TransparentCanvas {
   constructor ({ width, height }) {
     super({ width, height });
     this.halfW = this.width / 2;
@@ -46,20 +46,9 @@ export default class BaseControlPad extends Canvas {
       halfH,
     } = this;
 
-    CU.getImg().addEventListener("load", () => {
-      context.drawImage(CU.getImg(), quarterW, 0);
-    });
-
-    CL.getImg().addEventListener("load", () => {
-      context.drawImage(CL.getImg(), 0, 0, quarterW, height);
-    });
-
-    CB.getImg().addEventListener("load", () => {
-      context.drawImage(CB.getImg(), quarterW, halfH);
-    });
-
-    CR.getImg().addEventListener("load", () => {
-      context.drawImage(CR.getImg(), width - quarterW, 0, quarterW, height);
-    });
+    context.drawImage(CU.canvas, quarterW, 0);
+    context.drawImage(CL.canvas, 0, 0, quarterW, height);
+    context.drawImage(CB.canvas, quarterW, halfH);
+    context.drawImage(CR.canvas, width - quarterW, 0, quarterW, height);
   }
 }

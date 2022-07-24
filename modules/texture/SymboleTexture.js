@@ -1,4 +1,4 @@
-import TransparentTexture from "./TransparentTexture.js";
+import TransparentCanvas from "../canvas/TransparentCanvas.js";
 
 export const DIRECTIONS = {
   TOP: 0,
@@ -7,7 +7,7 @@ export const DIRECTIONS = {
   LEFT: -0.5
 };
 
-export default class SymboleTexture extends TransparentTexture {  
+export default class SymboleTexture extends TransparentCanvas {
   constructor ({
     width,
     height,

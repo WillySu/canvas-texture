@@ -1,7 +1,7 @@
-import Canvas from "../Canvas.js";
+import BaseCanvas from "../canvas/BaseCanvas.js";
 import { drawLines, drawRect } from "./utils.js";
 
-export default class WoodenBoxTexture extends Canvas {
+export default class WoodenBoxTexture extends BaseCanvas {
   constructor ({
     width,
     height,
