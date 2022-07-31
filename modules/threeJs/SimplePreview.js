@@ -15,6 +15,13 @@ export default class SimplePreview {
 
     this.renderer = new THREE.WebGLRenderer();
     this.camera = new THREE.PerspectiveCamera(75, this.width / this.height, 0.1, 1000);
+    this.camera.position.set(
+      this.cameraPosition.x,
+      this.cameraPosition.y,
+      this.cameraPosition.z
+    );
+    this.camera.lookAt(0, 0, 0);
+
     this.scene = new THREE.Scene();
     this.scene.add(new THREE.AxesHelper(500));
     // this.scene.add(new THREE.HemisphereLight(0xffeeb1, 0x080820, .2));
@@ -56,7 +63,6 @@ export default class SimplePreview {
   resize () {
     const {
       camera,
-      cameraPosition,
       controls,
       renderer,
       scene,
@@ -65,12 +71,6 @@ export default class SimplePreview {
     } = this;
 
     camera.aspect = width / height;
-    camera.position.set(
-      cameraPosition.x,
-      cameraPosition.y,
-      cameraPosition.z
-    );
-    camera.lookAt(0, 0, 0);
     camera.updateProjectionMatrix();
   
     controls.update();

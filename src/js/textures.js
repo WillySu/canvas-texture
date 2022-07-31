@@ -1,17 +1,22 @@
-import BaseControlPad from "../../modules/control-pad/BaseControlPad.js";
 import ArrowTexture from "../../modules/texture/ArrowTexture.js";
+import BaseControlPad from "../../modules/control-pad/BaseControlPad.js";
 import BrickWallTexture from "../../modules/texture/BrickWallTexture.js";
 import CeramicTileTexture from "../../modules/texture/CeramicTileTexture.js";
+import SimplePreview from "../../modules/threeJs/SimplePreview.js";
 import SmileFaceTexture from "../../modules/texture/SmileFaceTexture.js";
-import TriangleTexture from "../../modules/texture/TriangleTexture.js";
 import WoodenBoxTexture from "../../modules/texture/WoodenBoxTexture.js";
 import WoodenWallTexture from "../../modules/texture/WoodenWallTexture.js";
-import SimplePreview from "../../modules/threeJs/SimplePreview.js";
+import {
+  TopTriangle,
+  RightTriangle,
+  BottomTriangle,
+  LeftTriangle
+} from "../../modules/texture/TriangleTexture/index.js";
 import { DIRECTIONS } from "../../modules/texture/SymboleTexture.js";
 
 function init () {
-  const width = 64;
-  const height = 64;
+  const width = 128;
+  const height = 128;
   const table = document.createElement("table");
   const thead = document.createElement("thead");
   const theadTr = document.createElement("tr");
@@ -61,19 +66,19 @@ function init () {
     },
     {
       title: "Up Triangle",
-      texture: new TriangleTexture({ width, height, direction: DIRECTIONS.TOP })
+      texture: new TopTriangle({ width, height })
     },
     {
       title: "Left Triangle",
-      texture: new TriangleTexture({ width, height, direction: DIRECTIONS.LEFT })
+      texture: new LeftTriangle({ width, height })
     },
     {
       title: "Bottom Triangle",
-      texture: new TriangleTexture({ width, height, direction: DIRECTIONS.BOTTOM })
+      texture: new BottomTriangle({ width, height })
     },
     {
       title: "Right Triangle",
-      texture: new TriangleTexture({ width, height, direction: DIRECTIONS.RIGHT })
+      texture: new RightTriangle({ width, height })
     },
     {
       title: "Base Control Pad",

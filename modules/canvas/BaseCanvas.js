@@ -46,6 +46,15 @@ export default class BaseCanvas {
     // set in sub classes
   }
 
+  resize () {
+    // set in sub classes
+  }
+
+  clear () {
+    const { context, width, height } = this;
+    context.clearRect(0, 0, width, height);
+  }
+
   toDataURL () {
     return this.canvas.toDataURL();
   }

@@ -1,0 +1,10 @@
+.game-div canvas {
+  position: absolute;
+}
+
+.game-div .game-control-canvas {
+  left: calc(50vw - 128px);
+  bottom: 0;
+  margin-bottom: 5%;
+  cursor: pointer;
+}

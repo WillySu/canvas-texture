@@ -5,11 +5,16 @@ html, body {
 
 body {
   padding: 12px;
+  background-color: #aaaaaa;
 }
 
 .no-padding {
   padding: 0;
   overflow: hidden;
+}
+
+body.no-padding {
+  background-color: #dddddd;
 }
 
 .nav-bar {
@@ -26,10 +31,12 @@ body {
   color: black;
   padding: 12px 24px;
   border-radius: 12px;
+  color: #999999;
 }
 
 .nav-bar a.active {
-  background-color: lightgray;
+  background-color: #999999;
+  color: #ffffff;
 }
 
 .nav-bar a:hover {
