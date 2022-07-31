@@ -5,12 +5,18 @@ export default class BaseCanvas {
   _height;
   _width;
   _parent;
+  _onClick;
 
-  constructor ({ width, height } = {}) {
+  constructor ({
+    width,
+    height,
+    onClick
+  } = {}) {
     this.canvas = document.createElement("canvas");
     this.context = this.canvas.getContext("2d");
     this.height = height || 256;
     this.width = width || 256;
+    this.onClick = onClick;
   }
 
   get height () {
@@ -39,6 +45,20 @@ export default class BaseCanvas {
     if (newParent) {
       this._parent = newParent;
       this._parent.appendChild(this.canvas);
+    }
+  }
+
+  get onClick () {
+    return this._onClick;
+  }
+
+  set onClick (onClick) {
+    if (this._onClick) {
+      this.canvas.removeEventListener("click", this._onClick);
+    }
+    if (onClick) {
+      this._onClick = onClick;
+      this.canvas.addEventListener("click", this._onClick);
     }
   }
 

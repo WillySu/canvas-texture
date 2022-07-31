@@ -7,8 +7,13 @@ import {
 } from "../../modules/texture/TriangleTexture/index.js";
 
 export default class BaseControlPad extends TransparentCanvas {
-  constructor ({ width, height } = {}) {
+  constructor ({
+    width,
+    height,
+    onArrowClick = (direction) => console.log(direction)
+  } = {}) {
     super({ width, height });
+    this.onArrowClick = onArrowClick;
     this.halfW = this.width / 2;
     this.halfH = this.height / 2;
     this.quarterW = this.width / 4;
@@ -44,12 +49,26 @@ export default class BaseControlPad extends TransparentCanvas {
       quarterW,
       halfH,
     } = this;
+    const threeQuarterW = width - quarterW;
 
     this.clear();
 
     context.drawImage(CU.canvas, quarterW, 0);
     context.drawImage(CL.canvas, 0, 0);
     context.drawImage(CB.canvas, quarterW, halfH);
-    context.drawImage(CR.canvas, width - quarterW, 0);
+    context.drawImage(CR.canvas, threeQuarterW, 0);
+
+    this.onClick = (ev) => {
+      const { offsetX, offsetY } = ev;
+      if (offsetX < quarterW) {
+        return this.onArrowClick("Left");
+      } else if (offsetX > threeQuarterW) {
+        return this.onArrowClick("Right");
+      } else if (offsetY < halfH) {
+        return this.onArrowClick("Top");
+      }
+
+      return this.onArrowClick("Bottom");
+    }
   }
 }

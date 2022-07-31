@@ -11,7 +11,11 @@ export default class Game {
     this.fullScreen = new FullScreen({ cameraPosition });
     this.fullScreen.add(this.sokobanMap.map);
 
-    this.controlPad = new ControlPad({ width: 256, height: 128 });
+    this.controlPad = new ControlPad({
+      width: 256,
+      height: 128,
+      onArrowClick: (direction) => console.log("Move " + direction)
+    });
     this.controlPad.canvas.classList.add("game-control-canvas");
 
     this.div = document.createElement("div");
