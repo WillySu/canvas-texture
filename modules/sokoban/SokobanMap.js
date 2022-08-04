@@ -111,58 +111,29 @@ export default class SokobanMap extends BasicMap {
     return new THREE.Mesh(geometry, MATERIALS_MAP[code]);
   }
 
-  isOutsideOfMatrix({ row, col }) {
-    const { matrix } = this;
-    return row < 0 ||
-      row > matrix.length - 1 ||
-      col < 0 ||
-      col > matrix[row].length - 1;
-  }
+  swapPositions (position1, position2) {
+    const { row: curRow, col: curCol } = position1;
+    const { row: newRow, col: newCol } = position2;
 
-  canMove ({ curRow, curCol, rowAdjust, colAdjust, isSokoban = true }) {
-    const { BLOCK_TILE_LIST, TILES, matrix } = this;
-    const row = curRow + rowAdjust;
-    const col = curCol + colAdjust;
-    const code = matrix[row][col];
+    const code = this.matrix[newRow][newCol];
+    this.matrix[newRow][newCol] = this.matrix[curRow][curCol];
+    this.matrix[curRow][curCol] = code;
 
-    if (this.isOutsideOfMatrix({ row, col })) {
-      return false; // outside of matrix
-    } else if (BLOCK_TILE_LIST.includes(code)) {
-      return false; // Cannot push Sokoban self, wall or unmovable box
-    } else if (isSokoban && code === TILES.BOX) {
-      // Only Sokoban can push the movable box
-      const canPushBox = canMove({ curRow: row, curCol: col, rowAdjust, colAdjust, isSokoban: false });
-      return canPushBox;
+    const mesh = this.meshMatrix[newRow][newCol];
+    // Swap Three 3D Object positions x and z
+    const { x, z } = mesh.position;
+    this.meshMatrix[newRow][newCol].position.x = this.meshMatrix[curRow][curCol].position.x;
+    this.meshMatrix[newRow][newCol].position.z = this.meshMatrix[curRow][curCol].position.z;
+    this.meshMatrix[curRow][curCol].position.x = x;
+    this.meshMatrix[curRow][curCol].position.z = z;
+
+    // Swap Mesh position in meshMatrix
+    this.meshMatrix[newRow][newCol] = this.meshMatrix[curRow][curCol];
+    this.meshMatrix[curRow][curCol] = mesh;
+
+    if (this.sokobanRow === curRow && this.sokobanCol === curCol) {
+      this.sokobanRow = newRow;
+      this.sokobanCol = newCol;
     }
-
-    // Empty or one of Arrows
-    return true;
-  }
-
-  canMoveSokoban ({ rowAdjust, colAdjust }) {
-    const { sokobanRow, sokobanCol } = this;
-    return this.canMove({
-      curRow: sokobanRow,
-      curCol: sokobanCol,
-      rowAdjust,
-      colAdjust,
-      isSokoban: true
-    });
-  }
-
-  canMoveLeft () {
-    return this.canMoveSokoban({ rowAdjust: 0, colAdjust: -1 });
-  }
-
-  canMoveRight () {
-    return this.canMoveSokoban({ rowAdjust: 0, colAdjust: 1 });
-  }
-
-  canMoveTop () {
-    return this.canMoveSokoban({ rowAdjust: -1, colAdjust: 0 });
-  }
-
-  canMoveBottom () {
-    return this.canMoveSokoban({ rowAdjust: 1, colAdjust: 0 });
   }
 }

@@ -6,6 +6,13 @@ import {
   LeftTriangle
 } from "../../modules/texture/TriangleTexture/index.js";
 
+export const DIRECTIONS = {
+  TOP: "top",
+  RIGHT: "right",
+  BOTTOM: "bottom",
+  LEFT: "left"
+};
+
 export default class BaseControlPad extends TransparentCanvas {
   constructor ({
     width,
@@ -61,14 +68,14 @@ export default class BaseControlPad extends TransparentCanvas {
     this.onClick = (ev) => {
       const { offsetX, offsetY } = ev;
       if (offsetX < quarterW) {
-        return this.onArrowClick("Left");
+        return this.onArrowClick(DIRECTIONS.LEFT);
       } else if (offsetX > threeQuarterW) {
-        return this.onArrowClick("Right");
+        return this.onArrowClick(DIRECTIONS.RIGHT);
       } else if (offsetY < halfH) {
-        return this.onArrowClick("Top");
+        return this.onArrowClick(DIRECTIONS.TOP);
       }
 
-      return this.onArrowClick("Bottom");
+      return this.onArrowClick(DIRECTIONS.BOTTOM);
     }
   }
 }

@@ -6,6 +6,7 @@ export default class BasicMap {
     this._numOfCol = numOfCol;
     this._numOfRow = numOfRow;
     this.map = new THREE.Group();
+    this.meshMatrix = (new Array(this.numOfRow)).fill(undefined).map(() => (new Array(this.numOfCol).fill(undefined)));
   }
 
   get numOfCol () {
@@ -41,6 +42,7 @@ export default class BasicMap {
         const mesh = this.getMesh({ row, col });
         mesh.position.x = col * side;
         mesh.position.z = row * side;
+        this.meshMatrix[row][col] = mesh;
         this.map.add(mesh);
       }
     }
