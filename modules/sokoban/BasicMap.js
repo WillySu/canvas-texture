@@ -6,7 +6,8 @@ export default class BasicMap {
     this._numOfCol = numOfCol;
     this._numOfRow = numOfRow;
     this.map = new THREE.Group();
-    this.meshMatrix = (new Array(this.numOfRow)).fill(undefined).map(() => (new Array(this.numOfCol).fill(undefined)));
+    this.exitMeshMatrix = (new Array(this.numOfRow)).fill(undefined).map(() => (new Array(this.numOfCol).fill(undefined)));
+    this.itemMeshMatrix = (new Array(this.numOfRow)).fill(undefined).map(() => (new Array(this.numOfCol).fill(undefined)));
   }
 
   get numOfCol () {
@@ -21,7 +22,7 @@ export default class BasicMap {
     return this._side;
   }
 
-  getMesh () {
+  getExitMesh () {
     const { side } = this;
     const geometry = new THREE.PlaneGeometry(side, side);
     const material = new THREE.MeshBasicMaterial({
@@ -35,15 +36,29 @@ export default class BasicMap {
     return mesh;
   }
 
+  getItemMesh () {
+    return undefined;
+  }
+
   render () {
     const { numOfRow, numOfCol, side } = this;
     for (let row = 0; row < numOfRow; row++) {
       for (let col = 0; col < numOfCol; col++) {
-        const mesh = this.getMesh({ row, col });
-        mesh.position.x = col * side;
-        mesh.position.z = row * side;
-        this.meshMatrix[row][col] = mesh;
-        this.map.add(mesh);
+        const exitMesh = this.getExitMesh({ row, col });
+        const itemMesh = this.getItemMesh({ row, col });
+        if (exitMesh) {
+          exitMesh.position.x = col * side;
+          exitMesh.position.z = row * side;
+          this.map.add(exitMesh);
+        }
+        if (itemMesh) {
+          itemMesh.position.x = col * side;
+          itemMesh.position.z = row * side;
+          this.map.add(itemMesh);
+        }
+
+        this.exitMeshMatrix[row][col] = exitMesh;
+        this.itemMeshMatrix[row][col] = itemMesh;
       }
     }
 

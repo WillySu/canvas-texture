@@ -30,8 +30,7 @@ export default class Game {
         }
 
         if (positions) {
-          const [pos1, pos2] = positions;
-          this.sokobanMap.swapPositions(pos1, pos2);
+          this.sokobanMap.swapPositions(positions);
         }
       }
     });
@@ -71,16 +70,19 @@ export default class Game {
   canMove ({ curRow, curCol, rowAdjust, colAdjust, isSokoban = true }) {
     const newRow = curRow + rowAdjust;
     const newCol = curCol + colAdjust;
-    const code = this.matrix[newRow][newCol];
-
     if (this.isOutsideOfMatrix({ row: newRow, col: newCol })) {
       return false; // outside of matrix
-    } else if (this.BLOCK_TILE_LIST.includes(code)) {
+    }
+
+    const code = this.matrix[newRow][newCol];
+    if (this.BLOCK_TILE_LIST.includes(code)) {
       return false; // Cannot push Sokoban self, wall or unmovable box
     } else if (isSokoban && code === this.TILES.BOX) {
       // Only Sokoban can push the movable box
       const canPushBox = this.canMove({ curRow: newRow, curCol: newCol, rowAdjust, colAdjust, isSokoban: false });
-      if (!canPushBox) {
+      if (canPushBox) {
+        return [...canPushBox, { row: curRow, col: curCol }].reverse();
+      } else {
         return false;
       }
     }

@@ -78,22 +78,29 @@ export default class SokobanMap extends BasicMap {
     return boxGroup;
   }
 
-  getExitMesh (code) {
+  getArrowMesh (code) {
     const { MATERIALS_MAP, side } = this;
     const arrowGeo = new THREE.PlaneGeometry(side, side);
     const arrowMesh = new THREE.Mesh(arrowGeo, MATERIALS_MAP[code]);
-    const boxGroup = new THREE.Group();
 
     arrowMesh.rotation.x = -Math.PI / 2;
     arrowMesh.position.y = -side / 2;
 
-    boxGroup.add(arrowMesh);
-    boxGroup.add(this.getGroundMesh());
-
-    return boxGroup;
+    return arrowMesh;
   }
 
-  getMesh ({ row, col }) {
+  getExitMesh ({ row, col }) {
+    const { EXIT_TILE_LIST, matrix } = this;
+    const code = matrix[row][col];
+
+    if (EXIT_TILE_LIST.includes(code)) {
+      return this.getArrowMesh(code);
+    }
+
+    return undefined;
+  }
+
+  getItemMesh ({ row, col }) {
     const { EXIT_TILE_LIST, MATERIALS_MAP, TILES, matrix, side } = this;
     const code = matrix[row][col];
 
@@ -101,39 +108,43 @@ export default class SokobanMap extends BasicMap {
       return this.getSokobanMesh();
     } else if (code === TILES.BOX) {
       return this.getBoxMesh();
-    } else if (code === TILES.EMPTY) {
+    } else if (code === TILES.EMPTY || EXIT_TILE_LIST.includes(code)) {
       return this.getGroundMesh();
-    } else if (EXIT_TILE_LIST.includes(code)) {
-      return this.getExitMesh(code);
     }
 
     const geometry = new THREE.BoxGeometry(side, side, side);
     return new THREE.Mesh(geometry, MATERIALS_MAP[code]);
   }
 
-  swapPositions (position1, position2) {
-    const { row: curRow, col: curCol } = position1;
-    const { row: newRow, col: newCol } = position2;
+  swapPositions (positions) {
+    const [pos1, pos2] = positions;
+    const { row: curRow, col: curCol } = pos1;
+    const { row: newRow, col: newCol } = pos2;
 
     const code = this.matrix[newRow][newCol];
     this.matrix[newRow][newCol] = this.matrix[curRow][curCol];
     this.matrix[curRow][curCol] = code;
 
-    const mesh = this.meshMatrix[newRow][newCol];
+    const mesh = this.itemMeshMatrix[newRow][newCol];
     // Swap Three 3D Object positions x and z
     const { x, z } = mesh.position;
-    this.meshMatrix[newRow][newCol].position.x = this.meshMatrix[curRow][curCol].position.x;
-    this.meshMatrix[newRow][newCol].position.z = this.meshMatrix[curRow][curCol].position.z;
-    this.meshMatrix[curRow][curCol].position.x = x;
-    this.meshMatrix[curRow][curCol].position.z = z;
+    this.itemMeshMatrix[newRow][newCol].position.x = this.itemMeshMatrix[curRow][curCol].position.x;
+    this.itemMeshMatrix[newRow][newCol].position.z = this.itemMeshMatrix[curRow][curCol].position.z;
+    this.itemMeshMatrix[curRow][curCol].position.x = x;
+    this.itemMeshMatrix[curRow][curCol].position.z = z;
 
-    // Swap Mesh position in meshMatrix
-    this.meshMatrix[newRow][newCol] = this.meshMatrix[curRow][curCol];
-    this.meshMatrix[curRow][curCol] = mesh;
+    // Swap Mesh position in itemMeshMatrix
+    this.itemMeshMatrix[newRow][newCol] = this.itemMeshMatrix[curRow][curCol];
+    this.itemMeshMatrix[curRow][curCol] = mesh;
 
     if (this.sokobanRow === curRow && this.sokobanCol === curCol) {
       this.sokobanRow = newRow;
       this.sokobanCol = newCol;
+    }
+
+    if (positions.length > 2) {
+      const [pos, ...rest] = positions;
+      this.swapPositions(rest);
     }
   }
 }
